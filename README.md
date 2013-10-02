@@ -19,6 +19,62 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('grunt-fabric-deploy');
 ```
 
+*This plugin was designed to work with Grunt 0.4.x. If you're still using grunt v0.3.x it's strongly recommended that [you upgrade](http://gruntjs.com/upgrading-from-0.3-to-0.4).
+
+
+
+
+## Deploy task
+_Run this task with the `grunt deploy` command._
+
+
+### Options
+
+#### stdout
+Type: `Boolean` `false`
+Default: `'false'`
+
+Boolean switch for showing the output of each command.
+
+Example:
+```js
+options: {
+  stdout: true
+}
+```
+
+### Usage Examples
+
+```js
+deploy: {
+  options: {
+    variables: {
+      packed: 'filename'
+      host: 'server.com',
+      port: 22,
+      user: 'deploy_user'
+    }
+  },
+  pack: {
+    local: '/usr/bin/gnutar -zcf /tmp/{packed}.tar.gz -C ./ .'
+  },
+  upload: {
+    put: {
+      src: '/tmp/{packed}.tar.gz',
+      dest: '/tmp/{packed}.tar.gz'
+    },
+    run: [
+      'rm -rf /tmp/{packed}',
+      'mkdir -p /tmp/{packed}',
+      'tar -zxf /tmp/{packed}.tar.gz -C /tmp/{packed}',
+
+      'rm -rf /srv/www/server.com/public',
+      'mkdir -p /srv/www/server.com/public',
+      'mv /tmp/{packed}/* /srv/www/server.com/public/'
+    ]
+  }
+}
+```
 
 
 
@@ -30,4 +86,4 @@ grunt.loadNpmTasks('grunt-fabric-deploy');
 
 Task submitted by [Pieter Michels](http://noort.be/)
 
-*This file was generated on Wed Oct 02 2013 22:18:46.*
+*This file was generated on Wed Oct 02 2013 22:30:36.*
