@@ -6,7 +6,8 @@ Default: `'false'`
 
 Boolean switch for showing the output of each command.
 
-Example:
+### Example:
+
 ```js
 options: {
   stdout: true
@@ -19,9 +20,29 @@ Default: `'false'`
 
 Boolean switch for failing on an error.
 
-Example:
+### Example:
+
 ```js
 options: {
   failOnError: true
+}
+```
+
+## variables
+Type: `Object`
+
+Object with variables that can be used in each command.
+Variables in a string are placed in brackets `{}`.
+
+### Example:
+
+```js
+options: {
+  variables: {
+    var_a: 'test'
+  }
+}
+task_one: {
+  local: 'echo "{var_a}"'
 }
 ```

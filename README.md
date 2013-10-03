@@ -27,6 +27,90 @@ grunt.loadNpmTasks('grunt-fabric-deploy');
 ## Deploy task
 _Run this task with the `grunt deploy` command._
 
+### Task operations
+
+#### local
+Executes given commands in the local shell.
+
+##### Examples:
+
+```js
+task_one:
+  local: ''
+```
+
+Operations defined as array:
+
+```js
+task_one:
+  local: [
+    '',
+    ''
+  ]
+```
+
+#### put
+Puts file(s) on a remote server via scp.
+
+##### Requirements:
+You need to provide `host`, `user` and `port` for the ssh connection.
+
+##### Examples:
+
+```js
+options: {
+  variables: {
+    host: 'server.com',
+    user: 'user',
+    port: '22'
+  }
+},
+task_one: {
+  put: {
+    src: '/tmp/file.zip', // local path
+    dest: '/tmp/file.zip' // path on remote server
+  }
+}
+```
+
+#### run
+Executes given commands on the remote server.
+
+##### Requirements:
+You need to provide `host`, `user` and `port` for the ssh connection.
+
+##### Examples:
+
+```js
+options: {
+  variables: {
+    host: 'server.com',
+    user: 'user',
+    port: '22'
+  }
+},
+task_one: {
+  run: 'cat /tmp/file.txt'
+}
+```
+
+Operations defined as array:
+
+```js
+options: {
+  variables: {
+    host: 'server.com',
+    user: 'user',
+    port: '22'
+  }
+},
+task_one: {
+  run: [
+    'echo "test" > /tmp/file.txt',
+    'cat /tmp/file.txt'
+  ]
+}
+```
 
 ### Options
 
@@ -36,7 +120,8 @@ Default: `'false'`
 
 Boolean switch for showing the output of each command.
 
-Example:
+##### Example:
+
 ```js
 options: {
   stdout: true
@@ -49,10 +134,30 @@ Default: `'false'`
 
 Boolean switch for failing on an error.
 
-Example:
+##### Example:
+
 ```js
 options: {
   failOnError: true
+}
+```
+
+#### variables
+Type: `Object`
+
+Object with variables that can be used in each command.
+Variables in a string are placed in brackets `{}`.
+
+##### Example:
+
+```js
+options: {
+  variables: {
+    var_a: 'test'
+  }
+}
+task_one: {
+  local: 'echo "{var_a}"'
 }
 ```
 
@@ -100,4 +205,4 @@ deploy: {
 
 Task submitted by [Pieter Michels](http://noort.be/)
 
-*This file was generated on Thu Oct 03 2013 10:14:29.*
+*This file was generated on Thu Oct 03 2013 13:47:52.*
