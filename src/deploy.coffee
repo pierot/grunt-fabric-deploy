@@ -19,11 +19,11 @@ module.exports = (grunt) ->
     return cmd
 
   parse_operations = (target_config) =>
+    cmd = []
+
     # Loop operations
     for type, task of target_config
-      cmd = ''
       task = [task] unless task instanceof Array
-
       switch type
         when 'local'
           for sub_task in task
@@ -31,7 +31,7 @@ module.exports = (grunt) ->
 
             log_command type, sub_cmd
 
-            cmd = "#{cmd} #{sub_cmd}; "
+            cmd.push sub_cmd
 
         when 'put'
           for sub_task in task
@@ -39,25 +39,40 @@ module.exports = (grunt) ->
 
             log_command type, sub_cmd
 
-            cmd = "#{cmd} #{sub_cmd}; "
+            cmd.push sub_cmd
 
         when 'run'
+          local_cmd = ''
+
           for sub_task in task
             sub_cmd = parse_variables sub_task
 
             log_command type, sub_cmd
 
-            cmd = "#{cmd} #{sub_cmd}; "
+            local_cmd = "#{local_cmd} #{sub_cmd}; "
 
-          if cmd.length > 0
-            cmd = parse_variables "ssh -p {port} {user}@{host} '#{cmd}'"
+          if local_cmd.length > 0
+            local_cmd = parse_variables "ssh -p {port} {user}@{host} '#{local_cmd}'"
+
+          cmd.push local_cmd
 
         else # no operation is found, maybe grouped ..
           grunt.log.subhead "Running #{type} group task"
 
-          cmd = parse_operations task[0] # get out of array
+          cmd.push parse_operations task[0] # get out of array
 
     return cmd
+
+  # Execute commands
+  execute_commands = (cmds) =>
+    for cmd in cmds
+      if cmd instanceof Array
+        execute_commands cmd
+      else
+        output = exec_sync.exec cmd
+
+        grunt.log.writeln(output.stdout) if config.options.stdout
+        grunt.warn(output.stderr) if output.code != 0 && config.options.failOnError
 
   # Logger
   log_command = (type, command) =>
@@ -73,10 +88,4 @@ module.exports = (grunt) ->
 
     cmd = parse_operations grunt.config([this.name, this.target])
 
-    if cmd.length
-      output = exec_sync.exec cmd
-
-      grunt.log.writeln(output.stdout) if config.options.stdout
-
-      if config.options.failOnError
-        grunt.warn(output.stderr) if output.code != 0
+    execute_commands cmd if cmd.length
