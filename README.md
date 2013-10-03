@@ -1,4 +1,4 @@
-# grunt-fabric-deploy v0.0.2
+# grunt-fabric-deploy v0.0.3
 
 > Provides Fabric (python) like deploy tasks
 
@@ -93,6 +93,7 @@ deploy: {
 
 ## Release History
 
+ * 2013-10-03   v0.0.3   Better docs Refactor Grouping
  * 2013-10-03   v0.0.2   Added stdout + failOnError options
  * 2013-10-02   v0.0.1   Initial version
 
@@ -100,4 +101,4 @@ deploy: {
 
 Task submitted by [Pieter Michels](http://noort.be/)
 
-*This file was generated on Thu Oct 03 2013 10:14:29.*
+*This file was generated on Thu Oct 03 2013 17:17:50.*
