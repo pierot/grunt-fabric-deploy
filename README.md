@@ -1,4 +1,4 @@
-# grunt-fabric-deploy v0.0.1
+# grunt-fabric-deploy v0.0.2
 
 > Provides Fabric (python) like deploy tasks
 
@@ -40,6 +40,19 @@ Example:
 ```js
 options: {
   stdout: true
+}
+```
+
+#### failOnError
+Type: `Boolean` `false`
+Default: `'false'`
+
+Boolean switch for failing on an error.
+
+Example:
+```js
+options: {
+  failOnError: true
 }
 ```
 
@@ -87,4 +100,4 @@ deploy: {
 
 Task submitted by [Pieter Michels](http://noort.be/)
 
-*This file was generated on Thu Oct 03 2013 10:12:29.*
+*This file was generated on Thu Oct 03 2013 10:14:29.*
