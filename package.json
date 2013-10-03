@@ -1,7 +1,7 @@
 {
   "name": "grunt-fabric-deploy",
   "description": "Provides Fabric (python) like deploy tasks",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/pierot/grunt-fabric-deploy",
   "author": {
     "name": "Pieter Michels",
