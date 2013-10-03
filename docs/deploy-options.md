@@ -12,3 +12,16 @@ options: {
   stdout: true
 }
 ```
+
+## failOnError
+Type: `Boolean` `false`
+Default: `'false'`
+
+Boolean switch for failing on an error.
+
+Example:
+```js
+options: {
+  failOnError: true
+}
+```
