@@ -80,10 +80,11 @@ deploy: {
 
 ## Release History
 
+ * 2013-10-03   v0.0.2   Added stdout + failOnError options
  * 2013-10-02   v0.0.1   Initial version
 
 ---
 
 Task submitted by [Pieter Michels](http://noort.be/)
 
-*This file was generated on Wed Oct 02 2013 22:30:36.*
+*This file was generated on Thu Oct 03 2013 10:12:29.*

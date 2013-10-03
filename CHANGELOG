@@ -1,3 +1,8 @@
+v0.0.2:
+  date: 2013-10-03
+  changes:
+    - Added stdout + failOnError options
+
 v0.0.1:
   date: 2013-10-02
   changes:
