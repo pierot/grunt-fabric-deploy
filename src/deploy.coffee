@@ -8,45 +8,64 @@ module.exports = (grunt) ->
 
   exec_sync = require('execSync')
 
-  parse_cmd = (variables, cmd) =>
+  # Loop all available variables and replace
+  parse_variables = (variables, cmd) =>
     for key, value of variables
       cmd = cmd.replace new RegExp("{#{key}}", 'gi'), value
 
     return cmd
 
+  # Logger
+  log_command = (type, command) =>
+    grunt.log.writeln "[#{type}] #{command}"
+
+  # Register multi task
   grunt.task.registerMultiTask 'deploy', 'Deploy fabric-like', () ->
     config = grunt.config this.name
     variables = config.options.variables
-    cfg = grunt.config [this.name, this.target]
+    target_config = grunt.config [this.name, this.target]
 
     grunt.log.writeln ''
 
-    for cmd_name, cmd_task of cfg
+    # Loop tasks
+    for type, task of target_config
       cmd = ''
+      task = [task] unless task instanceof Array
 
-      switch cmd_name
+      switch type
         when 'local'
-          cmd = parse_cmd variables, cmd_task
+          for sub_task in task
+            sub_cmd = parse_variables variables, sub_task
 
-          grunt.log.writeln '[local] ' + cmd
+            log_command type, sub_cmd
+
+            cmd = "#{cmd} #{sub_cmd}; "
 
         when 'put'
-          cmd = parse_cmd variables, "scp -P {port} #{cmd_task.src} {user}@{host}:#{cmd_task.dest}"
+          for sub_task in task
+            sub_cmd = parse_variables variables, "scp -P {port} #{sub_task.src} {user}@{host}:#{sub_task.dest}"
 
-          grunt.log.writeln '[put] ' + cmd
+            log_command type, sub_cmd
+
+            cmd = "#{cmd} #{sub_cmd}; "
 
         when 'run'
-          for sub_cmd in cmd_task
-            sub_cmd = parse_cmd variables, sub_cmd
+          for sub_task in task
+            sub_cmd = parse_variables variables, sub_task
 
-            grunt.log.writeln '[run] ' + sub_cmd
+            log_command type, sub_cmd
 
             cmd = "#{cmd} #{sub_cmd}; "
 
           if cmd.length > 0
-            cmd = parse_cmd variables, "ssh -p {port} {user}@{host} '#{cmd}'"
+            cmd = parse_variables variables, "ssh -p {port} {user}@{host} '#{cmd}'"
 
-      exec_sync.run cmd if cmd.length
+      if cmd.length
+        output = exec_sync.exec cmd
 
-    grunt.log.writeln ''
+        grunt.log.writeln(output.stdout) if config.options.stdout
 
+        if config.options.failOnError
+          grunt.warn(output.stderr) if output.code != 0
+
+      # grunt.log.writeln ''
