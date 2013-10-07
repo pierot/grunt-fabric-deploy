@@ -57,7 +57,7 @@ module.exports = (grunt) ->
           cmd.push local_cmd
 
         else # no operation is found, maybe grouped ..
-          grunt.log.subhead "Running #{type} group task"
+          grunt.log.subhead "  Running #{type} group task"
 
           cmd.push parse_operations task[0] # get out of array
 

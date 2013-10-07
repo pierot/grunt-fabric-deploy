@@ -52,7 +52,7 @@
             cmd.push(local_cmd);
             break;
           default:
-            grunt.log.subhead("Running " + type + " group task");
+            grunt.log.subhead("  Running " + type + " group task");
             cmd.push(parse_operations(task[0]));
         }
       }
