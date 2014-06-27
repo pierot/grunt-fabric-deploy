@@ -1,11 +1,11 @@
-# grunt-fabric-deploy v0.0.3
+# grunt-fabric-deploy v0.0.4
 
 > Provides Fabric (python) like deploy tasks
 
 
 
 ## Getting Started
-This plugin requires Grunt `~0.4.0`
+This plugin requires Grunt `~0.4.5`
 
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
@@ -209,6 +209,7 @@ Type: `Object`
 
 Object with variables that can be used in each command.
 Variables in a string are placed in brackets `{}`.
+This object can be on task level as well (see examples).
 
 ##### Example:
 
@@ -238,7 +239,7 @@ deploy: {
   pack: {
     local: '/usr/bin/gnutar -zcf /tmp/{packed}.tar.gz -C ./ .'
   },
-  upload: {
+  staging: {
     put: {
       src: '/tmp/{packed}.tar.gz',
       dest: '/tmp/{packed}.tar.gz'
@@ -252,6 +253,18 @@ deploy: {
       'mkdir -p /srv/www/server.com/public',
       'mv /tmp/{packed}/* /srv/www/server.com/public/'
     ]
+  },
+  production: {
+    variables: {
+      host: 'server-production.com'
+    }
+    put: {
+      src: '/tmp/{packed}.tar.gz',
+      dest: '/tmp/{packed}.tar.gz'
+    },
+    run: [
+      'echo $PATH'
+    ]
   }
 }
 ```
@@ -260,6 +273,7 @@ deploy: {
 
 ## Release History
 
+ * 2014-06-27   v0.0.4   Variables on task level, merged into global variables
  * 2013-10-03   v0.0.3   Better docs Refactor Grouping
  * 2013-10-03   v0.0.2   Added stdout + failOnError options
  * 2013-10-02   v0.0.1   Initial version
@@ -268,4 +282,4 @@ deploy: {
 
 Task submitted by [Pieter Michels](http://noort.be/)
 
-*This file was generated on Thu Oct 03 2013 17:33:23.*
+*This file was generated on Fri Jun 27 2014 16:42:27.*

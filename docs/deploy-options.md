@@ -33,6 +33,7 @@ Type: `Object`
 
 Object with variables that can be used in each command.
 Variables in a string are placed in brackets `{}`.
+This object can be on task level as well (see examples).
 
 ### Example:
 

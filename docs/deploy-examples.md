@@ -13,7 +13,7 @@ deploy: {
   pack: {
     local: '/usr/bin/gnutar -zcf /tmp/{packed}.tar.gz -C ./ .'
   },
-  upload: {
+  staging: {
     put: {
       src: '/tmp/{packed}.tar.gz',
       dest: '/tmp/{packed}.tar.gz'
@@ -26,6 +26,18 @@ deploy: {
       'rm -rf /srv/www/server.com/public',
       'mkdir -p /srv/www/server.com/public',
       'mv /tmp/{packed}/* /srv/www/server.com/public/'
+    ]
+  },
+  production: {
+    variables: {
+      host: 'server-production.com'
+    }
+    put: {
+      src: '/tmp/{packed}.tar.gz',
+      dest: '/tmp/{packed}.tar.gz'
+    },
+    run: [
+      'echo $PATH'
     ]
   }
 }
