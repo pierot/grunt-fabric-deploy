@@ -17,12 +17,10 @@
     parse_operations = function(target_config) {
       var cmd, local_cmd, sub_cmd, sub_task, task, type, variables, _i, _j, _k, _len, _len1, _len2;
       cmd = [];
-      console.log(target_config);
       variables = variables_global;
       if (target_config.variables != null) {
         _.merge(variables, target_config.variables);
       }
-      console.log(variables);
       for (type in target_config) {
         task = target_config[type];
         if (!(task instanceof Array)) {

@@ -22,14 +22,10 @@ module.exports = (grunt) ->
   parse_operations = (target_config) =>
     cmd = []
 
-    console.log target_config
-
     variables = variables_global
 
     if target_config.variables?
       _.merge variables, target_config.variables
-
-    console.log variables
 
     # Loop operations
     for type, task of target_config

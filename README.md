@@ -1,4 +1,4 @@
-# grunt-fabric-deploy v0.0.4
+# grunt-fabric-deploy v0.0.5
 
 > Provides Fabric (python) like deploy tasks
 
@@ -273,6 +273,7 @@ deploy: {
 
 ## Release History
 
+ * 2014-06-27   v0.0.5   Removing console.log references
  * 2014-06-27   v0.0.4   Variables on task level, merged into global variables
  * 2013-10-03   v0.0.3   Better docs Refactor Grouping
  * 2013-10-03   v0.0.2   Added stdout + failOnError options
@@ -282,4 +283,4 @@ deploy: {
 
 Task submitted by [Pieter Michels](http://noort.be/)
 
-*This file was generated on Fri Jun 27 2014 16:42:27.*
+*This file was generated on Fri Jun 27 2014 16:53:38.*
