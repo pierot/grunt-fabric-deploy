@@ -1,13 +1,13 @@
 # grunt-fabric-deploy
 # http://noort.be/
 #
-# Copyright (c) 2014 Pieter Michels, contributors
+# Copyright (c) 2015 Pieter Michels, contributors
 # Licensed under the MIT license.
 
 module.exports = (grunt) ->
 
-  exec_sync = require('execSync')
-  _ = require('lodash')
+  exec = require 'sync-exec'
+  _ = require 'lodash'
 
   variables_global = null
   config = null
@@ -83,13 +83,13 @@ module.exports = (grunt) ->
 
   # Execute single command
   execute_command = (cmd) =>
-    output = exec_sync.exec cmd
+    output = exec cmd
 
     if config.options.stdout
-      grunt.log.writeln(output.stdout)
+      grunt.log.writeln output.stdout
 
-    if output.code != 0 && config.options.failOnError
-      grunt.warn(output.stderr)
+    if output.status != 0 && config.options.failOnError
+      grunt.log.errorlns output.stderr
 
   # Logger
   log_command = (type, command) =>

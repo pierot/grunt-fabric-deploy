@@ -1,4 +1,4 @@
-# grunt-fabric-deploy v0.0.5
+# grunt-fabric-deploy v0.0.6
 
 > Provides Fabric (python) like deploy tasks
 
@@ -283,4 +283,4 @@ deploy: {
 
 Task submitted by [Pieter Michels](http://noort.be/)
 
-*This file was generated on Fri Jun 27 2014 16:53:38.*
+*This file was generated on Thu May 21 2015 13:33:21.*

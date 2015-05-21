@@ -1,7 +1,7 @@
 # grunt-contrib-deploy
 # http://noort.be/
 #
-# Copyright (c) 2014 Pieter Michels, contributors
+# Copyright (c) 2015 Pieter Michels, contributors
 # Licensed under the MIT license.
 
 module.exports = (grunt) ->

@@ -1,7 +1,7 @@
 {
   "name": "grunt-fabric-deploy",
   "description": "Provides Fabric (python) like deploy tasks",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "homepage": "https://github.com/pierot/grunt-fabric-deploy",
   "author": {
     "name": "Pieter Michels",
@@ -25,13 +25,13 @@
     "node": ">=0.8.0"
   },
   "dependencies": {
-    "execSync": "*",
-    "lodash": "*"
+    "lodash": "2.4.1",
+    "sync-exec": "0.5.0"
   },
   "devDependencies": {
     "grunt-contrib-internal": "~0.4.10",
-    "grunt-contrib-coffee": "*",
-    "matchdep": "*",
+    "grunt-contrib-coffee": "0.7.0",
+    "matchdep": "0.1.2",
     "grunt": "~0.4.5"
   },
   "peerDependencies": {

@@ -1,8 +1,8 @@
 (function() {
   module.exports = function(grunt) {
-    var config, exec_sync, execute_command, execute_commands, log_command, parse_operations, parse_variables, variables_global, _,
+    var config, exec, execute_command, execute_commands, log_command, parse_operations, parse_variables, variables_global, _,
       _this = this;
-    exec_sync = require('execSync');
+    exec = require('sync-exec');
     _ = require('lodash');
     variables_global = null;
     config = null;
@@ -80,12 +80,12 @@
     };
     execute_command = function(cmd) {
       var output;
-      output = exec_sync.exec(cmd);
+      output = exec(cmd);
       if (config.options.stdout) {
         grunt.log.writeln(output.stdout);
       }
-      if (output.code !== 0 && config.options.failOnError) {
-        return grunt.warn(output.stderr);
+      if (output.status !== 0 && config.options.failOnError) {
+        return grunt.log.errorlns(output.stderr);
       }
     };
     log_command = function(type, command) {
