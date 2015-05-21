@@ -273,6 +273,7 @@ deploy: {
 
 ## Release History
 
+ * 2015-05-21   v0.0.6   Replacing exe dependency with https://github.com/gvarsanyi/sync-exec
  * 2014-06-27   v0.0.5   Removing console.log references
  * 2014-06-27   v0.0.4   Variables on task level, merged into global variables
  * 2013-10-03   v0.0.3   Better docs Refactor Grouping
@@ -283,4 +284,4 @@ deploy: {
 
 Task submitted by [Pieter Michels](http://noort.be/)
 
-*This file was generated on Thu May 21 2015 13:33:21.*
+*This file was generated on Thu May 21 2015 17:32:39.*

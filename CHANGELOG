@@ -1,3 +1,9 @@
+v0.0.6:
+  date: 2015-05-21
+  changes:
+    - Replacing exe dependency with https://github.com/gvarsanyi/sync-exec
+    - Fixing all dependency version numbers
+
 v0.0.5:
   date: 2014-06-27
   changes:
